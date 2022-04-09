@@ -1,0 +1,4187 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> instructions
+Rule 2     program -> <empty>
+Rule 3     instructions -> instructions instruction
+Rule 4     instructions -> instruction
+Rule 5     instruction -> { instructions }
+Rule 6     instruction -> RETURN ;
+Rule 7     instruction -> RETURN expr ;
+Rule 8     instruction -> BREAK ;
+Rule 9     instruction -> CONTINUE ;
+Rule 10    instruction -> PRINT expressions ;
+Rule 11    instruction -> var = expr ;
+Rule 12    instruction -> var ADDASSIGN expr ;
+Rule 13    instruction -> var SUBASSIGN expr ;
+Rule 14    instruction -> var MULASSIGN expr ;
+Rule 15    instruction -> var DIVASSIGN expr ;
+Rule 16    instruction -> WHILE ( condition ) instruction
+Rule 17    instruction -> FOR ID = range instruction
+Rule 18    instruction -> FOR ( ID = range ) instruction
+Rule 19    instruction -> IF ( condition ) instruction
+Rule 20    instruction -> IF ( condition ) instruction ELSE instruction
+Rule 21    condition -> expr EQ expr
+Rule 22    condition -> expr NE expr
+Rule 23    condition -> expr GE expr
+Rule 24    condition -> expr LE expr
+Rule 25    condition -> expr > expr
+Rule 26    condition -> expr < expr
+Rule 27    var -> ID
+Rule 28    expr -> ID [ range ]
+Rule 29    var -> ID [ range ]
+Rule 30    var -> ID [ expr ]
+Rule 31    var -> ID [ expr , expr ]
+Rule 32    expr -> ID [ expr ]
+Rule 33    expr -> ID [ expr , expr ]
+Rule 34    expr -> - expr
+Rule 35    expr -> expr + expr
+Rule 36    expr -> expr - expr
+Rule 37    expr -> expr * expr
+Rule 38    expr -> expr / expr
+Rule 39    expr -> expr DOTADD expr
+Rule 40    expr -> expr DOTSUB expr
+Rule 41    expr -> expr DOTMUL expr
+Rule 42    expr -> expr DOTDIV expr
+Rule 43    expr -> ( expr )
+Rule 44    expr -> expr '
+Rule 45    expr -> EYE ( expr )
+Rule 46    expr -> ZEROS ( expr )
+Rule 47    expr -> ONES ( expr )
+Rule 48    expr -> FLOATNUM
+Rule 49    expr -> INTNUM
+Rule 50    expr -> STRING
+Rule 51    expr -> ID
+Rule 52    expr -> [ expressions ]
+Rule 53    expr -> [ range ]
+Rule 54    expressions -> expressions , expr
+Rule 55    expressions -> expr
+Rule 56    range -> expr : expr
+
+Terminals, with rules where they appear
+
+'                    : 44
+(                    : 16 18 19 20 43 45 46 47
+)                    : 16 18 19 20 43 45 46 47
+*                    : 37
++                    : 35
+,                    : 31 33 54
+-                    : 34 36
+/                    : 38
+:                    : 56
+;                    : 6 7 8 9 10 11 12 13 14 15
+<                    : 26
+=                    : 11 17 18
+>                    : 25
+ADDASSIGN            : 12
+BREAK                : 8
+CONTINUE             : 9
+DIVASSIGN            : 15
+DOTADD               : 39
+DOTDIV               : 42
+DOTMUL               : 41
+DOTSUB               : 40
+ELSE                 : 20
+EQ                   : 21
+EYE                  : 45
+FLOATNUM             : 48
+FOR                  : 17 18
+GE                   : 23
+ID                   : 17 18 27 28 29 30 31 32 33 51
+IF                   : 19 20
+INTNUM               : 49
+LE                   : 24
+MULASSIGN            : 14
+NE                   : 22
+ONES                 : 47
+PRINT                : 10
+RETURN               : 6 7
+STRING               : 50
+SUBASSIGN            : 13
+WHILE                : 16
+ZEROS                : 46
+[                    : 28 29 30 31 32 33 52 53
+]                    : 28 29 30 31 32 33 52 53
+error                : 
+{                    : 5
+}                    : 5
+
+Nonterminals, with rules where they appear
+
+condition            : 16 19 20
+expr                 : 7 11 12 13 14 15 21 21 22 22 23 23 24 24 25 25 26 26 30 31 31 32 33 33 34 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 44 45 46 47 54 55 56 56
+expressions          : 10 52 54
+instruction          : 3 4 16 17 18 19 20 20
+instructions         : 1 3 5
+program              : 0
+range                : 17 18 28 29 53
+var                  : 11 12 13 14 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . instructions
+    (2) program -> .
+    (3) instructions -> . instructions instruction
+    (4) instructions -> . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    $end            reduce using rule 2 (program -> .)
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    program                        shift and go to state 1
+    instructions                   shift and go to state 2
+    instruction                    shift and go to state 3
+    var                            shift and go to state 9
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> instructions .
+    (3) instructions -> instructions . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    $end            reduce using rule 1 (program -> instructions .)
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 14
+    var                            shift and go to state 9
+
+state 3
+
+    (4) instructions -> instruction .
+
+    {               reduce using rule 4 (instructions -> instruction .)
+    RETURN          reduce using rule 4 (instructions -> instruction .)
+    BREAK           reduce using rule 4 (instructions -> instruction .)
+    CONTINUE        reduce using rule 4 (instructions -> instruction .)
+    PRINT           reduce using rule 4 (instructions -> instruction .)
+    WHILE           reduce using rule 4 (instructions -> instruction .)
+    FOR             reduce using rule 4 (instructions -> instruction .)
+    IF              reduce using rule 4 (instructions -> instruction .)
+    ID              reduce using rule 4 (instructions -> instruction .)
+    $end            reduce using rule 4 (instructions -> instruction .)
+    }               reduce using rule 4 (instructions -> instruction .)
+
+
+state 4
+
+    (5) instruction -> { . instructions }
+    (3) instructions -> . instructions instruction
+    (4) instructions -> . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instructions                   shift and go to state 15
+    instruction                    shift and go to state 3
+    var                            shift and go to state 9
+
+state 5
+
+    (6) instruction -> RETURN . ;
+    (7) instruction -> RETURN . expr ;
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ;               shift and go to state 16
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 17
+
+state 6
+
+    (8) instruction -> BREAK . ;
+
+    ;               shift and go to state 28
+
+
+state 7
+
+    (9) instruction -> CONTINUE . ;
+
+    ;               shift and go to state 29
+
+
+state 8
+
+    (10) instruction -> PRINT . expressions ;
+    (54) expressions -> . expressions , expr
+    (55) expressions -> . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expressions                    shift and go to state 30
+    expr                           shift and go to state 31
+
+state 9
+
+    (11) instruction -> var . = expr ;
+    (12) instruction -> var . ADDASSIGN expr ;
+    (13) instruction -> var . SUBASSIGN expr ;
+    (14) instruction -> var . MULASSIGN expr ;
+    (15) instruction -> var . DIVASSIGN expr ;
+
+    =               shift and go to state 32
+    ADDASSIGN       shift and go to state 33
+    SUBASSIGN       shift and go to state 34
+    MULASSIGN       shift and go to state 35
+    DIVASSIGN       shift and go to state 36
+
+
+state 10
+
+    (16) instruction -> WHILE . ( condition ) instruction
+
+    (               shift and go to state 37
+
+
+state 11
+
+    (17) instruction -> FOR . ID = range instruction
+    (18) instruction -> FOR . ( ID = range ) instruction
+
+    ID              shift and go to state 38
+    (               shift and go to state 39
+
+
+state 12
+
+    (27) var -> ID .
+    (29) var -> ID . [ range ]
+    (30) var -> ID . [ expr ]
+    (31) var -> ID . [ expr , expr ]
+
+    =               reduce using rule 27 (var -> ID .)
+    ADDASSIGN       reduce using rule 27 (var -> ID .)
+    SUBASSIGN       reduce using rule 27 (var -> ID .)
+    MULASSIGN       reduce using rule 27 (var -> ID .)
+    DIVASSIGN       reduce using rule 27 (var -> ID .)
+    [               shift and go to state 40
+
+
+state 13
+
+    (19) instruction -> IF . ( condition ) instruction
+    (20) instruction -> IF . ( condition ) instruction ELSE instruction
+
+    (               shift and go to state 41
+
+
+state 14
+
+    (3) instructions -> instructions instruction .
+
+    {               reduce using rule 3 (instructions -> instructions instruction .)
+    RETURN          reduce using rule 3 (instructions -> instructions instruction .)
+    BREAK           reduce using rule 3 (instructions -> instructions instruction .)
+    CONTINUE        reduce using rule 3 (instructions -> instructions instruction .)
+    PRINT           reduce using rule 3 (instructions -> instructions instruction .)
+    WHILE           reduce using rule 3 (instructions -> instructions instruction .)
+    FOR             reduce using rule 3 (instructions -> instructions instruction .)
+    IF              reduce using rule 3 (instructions -> instructions instruction .)
+    ID              reduce using rule 3 (instructions -> instructions instruction .)
+    $end            reduce using rule 3 (instructions -> instructions instruction .)
+    }               reduce using rule 3 (instructions -> instructions instruction .)
+
+
+state 15
+
+    (5) instruction -> { instructions . }
+    (3) instructions -> instructions . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    }               shift and go to state 42
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 14
+    var                            shift and go to state 9
+
+state 16
+
+    (6) instruction -> RETURN ; .
+
+    {               reduce using rule 6 (instruction -> RETURN ; .)
+    RETURN          reduce using rule 6 (instruction -> RETURN ; .)
+    BREAK           reduce using rule 6 (instruction -> RETURN ; .)
+    CONTINUE        reduce using rule 6 (instruction -> RETURN ; .)
+    PRINT           reduce using rule 6 (instruction -> RETURN ; .)
+    WHILE           reduce using rule 6 (instruction -> RETURN ; .)
+    FOR             reduce using rule 6 (instruction -> RETURN ; .)
+    IF              reduce using rule 6 (instruction -> RETURN ; .)
+    ID              reduce using rule 6 (instruction -> RETURN ; .)
+    $end            reduce using rule 6 (instruction -> RETURN ; .)
+    }               reduce using rule 6 (instruction -> RETURN ; .)
+    ELSE            reduce using rule 6 (instruction -> RETURN ; .)
+
+
+state 17
+
+    (7) instruction -> RETURN expr . ;
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               shift and go to state 43
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 18
+
+    (28) expr -> ID . [ range ]
+    (32) expr -> ID . [ expr ]
+    (33) expr -> ID . [ expr , expr ]
+    (51) expr -> ID .
+
+    [               shift and go to state 53
+    ;               reduce using rule 51 (expr -> ID .)
+    +               reduce using rule 51 (expr -> ID .)
+    -               reduce using rule 51 (expr -> ID .)
+    *               reduce using rule 51 (expr -> ID .)
+    /               reduce using rule 51 (expr -> ID .)
+    DOTADD          reduce using rule 51 (expr -> ID .)
+    DOTSUB          reduce using rule 51 (expr -> ID .)
+    DOTMUL          reduce using rule 51 (expr -> ID .)
+    DOTDIV          reduce using rule 51 (expr -> ID .)
+    '               reduce using rule 51 (expr -> ID .)
+    ,               reduce using rule 51 (expr -> ID .)
+    :               reduce using rule 51 (expr -> ID .)
+    ]               reduce using rule 51 (expr -> ID .)
+    )               reduce using rule 51 (expr -> ID .)
+    EQ              reduce using rule 51 (expr -> ID .)
+    NE              reduce using rule 51 (expr -> ID .)
+    GE              reduce using rule 51 (expr -> ID .)
+    LE              reduce using rule 51 (expr -> ID .)
+    >               reduce using rule 51 (expr -> ID .)
+    <               reduce using rule 51 (expr -> ID .)
+    {               reduce using rule 51 (expr -> ID .)
+    RETURN          reduce using rule 51 (expr -> ID .)
+    BREAK           reduce using rule 51 (expr -> ID .)
+    CONTINUE        reduce using rule 51 (expr -> ID .)
+    PRINT           reduce using rule 51 (expr -> ID .)
+    WHILE           reduce using rule 51 (expr -> ID .)
+    FOR             reduce using rule 51 (expr -> ID .)
+    IF              reduce using rule 51 (expr -> ID .)
+    ID              reduce using rule 51 (expr -> ID .)
+
+
+state 19
+
+    (52) expr -> [ . expressions ]
+    (53) expr -> [ . range ]
+    (54) expressions -> . expressions , expr
+    (55) expressions -> . expr
+    (56) range -> . expr : expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expressions                    shift and go to state 54
+    range                          shift and go to state 55
+    expr                           shift and go to state 56
+
+state 20
+
+    (34) expr -> - . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 57
+
+state 21
+
+    (43) expr -> ( . expr )
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 58
+
+state 22
+
+    (45) expr -> EYE . ( expr )
+
+    (               shift and go to state 59
+
+
+state 23
+
+    (46) expr -> ZEROS . ( expr )
+
+    (               shift and go to state 60
+
+
+state 24
+
+    (47) expr -> ONES . ( expr )
+
+    (               shift and go to state 61
+
+
+state 25
+
+    (48) expr -> FLOATNUM .
+
+    ;               reduce using rule 48 (expr -> FLOATNUM .)
+    +               reduce using rule 48 (expr -> FLOATNUM .)
+    -               reduce using rule 48 (expr -> FLOATNUM .)
+    *               reduce using rule 48 (expr -> FLOATNUM .)
+    /               reduce using rule 48 (expr -> FLOATNUM .)
+    DOTADD          reduce using rule 48 (expr -> FLOATNUM .)
+    DOTSUB          reduce using rule 48 (expr -> FLOATNUM .)
+    DOTMUL          reduce using rule 48 (expr -> FLOATNUM .)
+    DOTDIV          reduce using rule 48 (expr -> FLOATNUM .)
+    '               reduce using rule 48 (expr -> FLOATNUM .)
+    ,               reduce using rule 48 (expr -> FLOATNUM .)
+    :               reduce using rule 48 (expr -> FLOATNUM .)
+    ]               reduce using rule 48 (expr -> FLOATNUM .)
+    )               reduce using rule 48 (expr -> FLOATNUM .)
+    EQ              reduce using rule 48 (expr -> FLOATNUM .)
+    NE              reduce using rule 48 (expr -> FLOATNUM .)
+    GE              reduce using rule 48 (expr -> FLOATNUM .)
+    LE              reduce using rule 48 (expr -> FLOATNUM .)
+    >               reduce using rule 48 (expr -> FLOATNUM .)
+    <               reduce using rule 48 (expr -> FLOATNUM .)
+    {               reduce using rule 48 (expr -> FLOATNUM .)
+    RETURN          reduce using rule 48 (expr -> FLOATNUM .)
+    BREAK           reduce using rule 48 (expr -> FLOATNUM .)
+    CONTINUE        reduce using rule 48 (expr -> FLOATNUM .)
+    PRINT           reduce using rule 48 (expr -> FLOATNUM .)
+    WHILE           reduce using rule 48 (expr -> FLOATNUM .)
+    FOR             reduce using rule 48 (expr -> FLOATNUM .)
+    IF              reduce using rule 48 (expr -> FLOATNUM .)
+    ID              reduce using rule 48 (expr -> FLOATNUM .)
+
+
+state 26
+
+    (49) expr -> INTNUM .
+
+    ;               reduce using rule 49 (expr -> INTNUM .)
+    +               reduce using rule 49 (expr -> INTNUM .)
+    -               reduce using rule 49 (expr -> INTNUM .)
+    *               reduce using rule 49 (expr -> INTNUM .)
+    /               reduce using rule 49 (expr -> INTNUM .)
+    DOTADD          reduce using rule 49 (expr -> INTNUM .)
+    DOTSUB          reduce using rule 49 (expr -> INTNUM .)
+    DOTMUL          reduce using rule 49 (expr -> INTNUM .)
+    DOTDIV          reduce using rule 49 (expr -> INTNUM .)
+    '               reduce using rule 49 (expr -> INTNUM .)
+    ,               reduce using rule 49 (expr -> INTNUM .)
+    :               reduce using rule 49 (expr -> INTNUM .)
+    ]               reduce using rule 49 (expr -> INTNUM .)
+    )               reduce using rule 49 (expr -> INTNUM .)
+    EQ              reduce using rule 49 (expr -> INTNUM .)
+    NE              reduce using rule 49 (expr -> INTNUM .)
+    GE              reduce using rule 49 (expr -> INTNUM .)
+    LE              reduce using rule 49 (expr -> INTNUM .)
+    >               reduce using rule 49 (expr -> INTNUM .)
+    <               reduce using rule 49 (expr -> INTNUM .)
+    {               reduce using rule 49 (expr -> INTNUM .)
+    RETURN          reduce using rule 49 (expr -> INTNUM .)
+    BREAK           reduce using rule 49 (expr -> INTNUM .)
+    CONTINUE        reduce using rule 49 (expr -> INTNUM .)
+    PRINT           reduce using rule 49 (expr -> INTNUM .)
+    WHILE           reduce using rule 49 (expr -> INTNUM .)
+    FOR             reduce using rule 49 (expr -> INTNUM .)
+    IF              reduce using rule 49 (expr -> INTNUM .)
+    ID              reduce using rule 49 (expr -> INTNUM .)
+
+
+state 27
+
+    (50) expr -> STRING .
+
+    ;               reduce using rule 50 (expr -> STRING .)
+    +               reduce using rule 50 (expr -> STRING .)
+    -               reduce using rule 50 (expr -> STRING .)
+    *               reduce using rule 50 (expr -> STRING .)
+    /               reduce using rule 50 (expr -> STRING .)
+    DOTADD          reduce using rule 50 (expr -> STRING .)
+    DOTSUB          reduce using rule 50 (expr -> STRING .)
+    DOTMUL          reduce using rule 50 (expr -> STRING .)
+    DOTDIV          reduce using rule 50 (expr -> STRING .)
+    '               reduce using rule 50 (expr -> STRING .)
+    ,               reduce using rule 50 (expr -> STRING .)
+    :               reduce using rule 50 (expr -> STRING .)
+    ]               reduce using rule 50 (expr -> STRING .)
+    )               reduce using rule 50 (expr -> STRING .)
+    EQ              reduce using rule 50 (expr -> STRING .)
+    NE              reduce using rule 50 (expr -> STRING .)
+    GE              reduce using rule 50 (expr -> STRING .)
+    LE              reduce using rule 50 (expr -> STRING .)
+    >               reduce using rule 50 (expr -> STRING .)
+    <               reduce using rule 50 (expr -> STRING .)
+    {               reduce using rule 50 (expr -> STRING .)
+    RETURN          reduce using rule 50 (expr -> STRING .)
+    BREAK           reduce using rule 50 (expr -> STRING .)
+    CONTINUE        reduce using rule 50 (expr -> STRING .)
+    PRINT           reduce using rule 50 (expr -> STRING .)
+    WHILE           reduce using rule 50 (expr -> STRING .)
+    FOR             reduce using rule 50 (expr -> STRING .)
+    IF              reduce using rule 50 (expr -> STRING .)
+    ID              reduce using rule 50 (expr -> STRING .)
+
+
+state 28
+
+    (8) instruction -> BREAK ; .
+
+    {               reduce using rule 8 (instruction -> BREAK ; .)
+    RETURN          reduce using rule 8 (instruction -> BREAK ; .)
+    BREAK           reduce using rule 8 (instruction -> BREAK ; .)
+    CONTINUE        reduce using rule 8 (instruction -> BREAK ; .)
+    PRINT           reduce using rule 8 (instruction -> BREAK ; .)
+    WHILE           reduce using rule 8 (instruction -> BREAK ; .)
+    FOR             reduce using rule 8 (instruction -> BREAK ; .)
+    IF              reduce using rule 8 (instruction -> BREAK ; .)
+    ID              reduce using rule 8 (instruction -> BREAK ; .)
+    $end            reduce using rule 8 (instruction -> BREAK ; .)
+    }               reduce using rule 8 (instruction -> BREAK ; .)
+    ELSE            reduce using rule 8 (instruction -> BREAK ; .)
+
+
+state 29
+
+    (9) instruction -> CONTINUE ; .
+
+    {               reduce using rule 9 (instruction -> CONTINUE ; .)
+    RETURN          reduce using rule 9 (instruction -> CONTINUE ; .)
+    BREAK           reduce using rule 9 (instruction -> CONTINUE ; .)
+    CONTINUE        reduce using rule 9 (instruction -> CONTINUE ; .)
+    PRINT           reduce using rule 9 (instruction -> CONTINUE ; .)
+    WHILE           reduce using rule 9 (instruction -> CONTINUE ; .)
+    FOR             reduce using rule 9 (instruction -> CONTINUE ; .)
+    IF              reduce using rule 9 (instruction -> CONTINUE ; .)
+    ID              reduce using rule 9 (instruction -> CONTINUE ; .)
+    $end            reduce using rule 9 (instruction -> CONTINUE ; .)
+    }               reduce using rule 9 (instruction -> CONTINUE ; .)
+    ELSE            reduce using rule 9 (instruction -> CONTINUE ; .)
+
+
+state 30
+
+    (10) instruction -> PRINT expressions . ;
+    (54) expressions -> expressions . , expr
+
+    ;               shift and go to state 62
+    ,               shift and go to state 63
+
+
+state 31
+
+    (55) expressions -> expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 55 (expressions -> expr .)
+    ,               reduce using rule 55 (expressions -> expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 32
+
+    (11) instruction -> var = . expr ;
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 64
+
+state 33
+
+    (12) instruction -> var ADDASSIGN . expr ;
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 65
+
+state 34
+
+    (13) instruction -> var SUBASSIGN . expr ;
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 66
+
+state 35
+
+    (14) instruction -> var MULASSIGN . expr ;
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 67
+
+state 36
+
+    (15) instruction -> var DIVASSIGN . expr ;
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 68
+
+state 37
+
+    (16) instruction -> WHILE ( . condition ) instruction
+    (21) condition -> . expr EQ expr
+    (22) condition -> . expr NE expr
+    (23) condition -> . expr GE expr
+    (24) condition -> . expr LE expr
+    (25) condition -> . expr > expr
+    (26) condition -> . expr < expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    condition                      shift and go to state 69
+    expr                           shift and go to state 70
+
+state 38
+
+    (17) instruction -> FOR ID . = range instruction
+
+    =               shift and go to state 71
+
+
+state 39
+
+    (18) instruction -> FOR ( . ID = range ) instruction
+
+    ID              shift and go to state 72
+
+
+state 40
+
+    (29) var -> ID [ . range ]
+    (30) var -> ID [ . expr ]
+    (31) var -> ID [ . expr , expr ]
+    (56) range -> . expr : expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    range                          shift and go to state 73
+    expr                           shift and go to state 74
+
+state 41
+
+    (19) instruction -> IF ( . condition ) instruction
+    (20) instruction -> IF ( . condition ) instruction ELSE instruction
+    (21) condition -> . expr EQ expr
+    (22) condition -> . expr NE expr
+    (23) condition -> . expr GE expr
+    (24) condition -> . expr LE expr
+    (25) condition -> . expr > expr
+    (26) condition -> . expr < expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    condition                      shift and go to state 75
+    expr                           shift and go to state 70
+
+state 42
+
+    (5) instruction -> { instructions } .
+
+    {               reduce using rule 5 (instruction -> { instructions } .)
+    RETURN          reduce using rule 5 (instruction -> { instructions } .)
+    BREAK           reduce using rule 5 (instruction -> { instructions } .)
+    CONTINUE        reduce using rule 5 (instruction -> { instructions } .)
+    PRINT           reduce using rule 5 (instruction -> { instructions } .)
+    WHILE           reduce using rule 5 (instruction -> { instructions } .)
+    FOR             reduce using rule 5 (instruction -> { instructions } .)
+    IF              reduce using rule 5 (instruction -> { instructions } .)
+    ID              reduce using rule 5 (instruction -> { instructions } .)
+    $end            reduce using rule 5 (instruction -> { instructions } .)
+    }               reduce using rule 5 (instruction -> { instructions } .)
+    ELSE            reduce using rule 5 (instruction -> { instructions } .)
+
+
+state 43
+
+    (7) instruction -> RETURN expr ; .
+
+    {               reduce using rule 7 (instruction -> RETURN expr ; .)
+    RETURN          reduce using rule 7 (instruction -> RETURN expr ; .)
+    BREAK           reduce using rule 7 (instruction -> RETURN expr ; .)
+    CONTINUE        reduce using rule 7 (instruction -> RETURN expr ; .)
+    PRINT           reduce using rule 7 (instruction -> RETURN expr ; .)
+    WHILE           reduce using rule 7 (instruction -> RETURN expr ; .)
+    FOR             reduce using rule 7 (instruction -> RETURN expr ; .)
+    IF              reduce using rule 7 (instruction -> RETURN expr ; .)
+    ID              reduce using rule 7 (instruction -> RETURN expr ; .)
+    $end            reduce using rule 7 (instruction -> RETURN expr ; .)
+    }               reduce using rule 7 (instruction -> RETURN expr ; .)
+    ELSE            reduce using rule 7 (instruction -> RETURN expr ; .)
+
+
+state 44
+
+    (35) expr -> expr + . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 76
+
+state 45
+
+    (36) expr -> expr - . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 77
+
+state 46
+
+    (37) expr -> expr * . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 78
+
+state 47
+
+    (38) expr -> expr / . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 79
+
+state 48
+
+    (39) expr -> expr DOTADD . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 80
+
+state 49
+
+    (40) expr -> expr DOTSUB . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 81
+
+state 50
+
+    (41) expr -> expr DOTMUL . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 82
+
+state 51
+
+    (42) expr -> expr DOTDIV . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 83
+
+state 52
+
+    (44) expr -> expr ' .
+
+    ;               reduce using rule 44 (expr -> expr ' .)
+    +               reduce using rule 44 (expr -> expr ' .)
+    -               reduce using rule 44 (expr -> expr ' .)
+    *               reduce using rule 44 (expr -> expr ' .)
+    /               reduce using rule 44 (expr -> expr ' .)
+    DOTADD          reduce using rule 44 (expr -> expr ' .)
+    DOTSUB          reduce using rule 44 (expr -> expr ' .)
+    DOTMUL          reduce using rule 44 (expr -> expr ' .)
+    DOTDIV          reduce using rule 44 (expr -> expr ' .)
+    '               reduce using rule 44 (expr -> expr ' .)
+    ,               reduce using rule 44 (expr -> expr ' .)
+    :               reduce using rule 44 (expr -> expr ' .)
+    ]               reduce using rule 44 (expr -> expr ' .)
+    )               reduce using rule 44 (expr -> expr ' .)
+    EQ              reduce using rule 44 (expr -> expr ' .)
+    NE              reduce using rule 44 (expr -> expr ' .)
+    GE              reduce using rule 44 (expr -> expr ' .)
+    LE              reduce using rule 44 (expr -> expr ' .)
+    >               reduce using rule 44 (expr -> expr ' .)
+    <               reduce using rule 44 (expr -> expr ' .)
+    {               reduce using rule 44 (expr -> expr ' .)
+    RETURN          reduce using rule 44 (expr -> expr ' .)
+    BREAK           reduce using rule 44 (expr -> expr ' .)
+    CONTINUE        reduce using rule 44 (expr -> expr ' .)
+    PRINT           reduce using rule 44 (expr -> expr ' .)
+    WHILE           reduce using rule 44 (expr -> expr ' .)
+    FOR             reduce using rule 44 (expr -> expr ' .)
+    IF              reduce using rule 44 (expr -> expr ' .)
+    ID              reduce using rule 44 (expr -> expr ' .)
+
+
+state 53
+
+    (28) expr -> ID [ . range ]
+    (32) expr -> ID [ . expr ]
+    (33) expr -> ID [ . expr , expr ]
+    (56) range -> . expr : expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    range                          shift and go to state 84
+    expr                           shift and go to state 85
+
+state 54
+
+    (52) expr -> [ expressions . ]
+    (54) expressions -> expressions . , expr
+
+    ]               shift and go to state 86
+    ,               shift and go to state 63
+
+
+state 55
+
+    (53) expr -> [ range . ]
+
+    ]               shift and go to state 87
+
+
+state 56
+
+    (55) expressions -> expr .
+    (56) range -> expr . : expr
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ]               reduce using rule 55 (expressions -> expr .)
+    ,               reduce using rule 55 (expressions -> expr .)
+    :               shift and go to state 88
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 57
+
+    (34) expr -> - expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 34 (expr -> - expr .)
+    +               reduce using rule 34 (expr -> - expr .)
+    -               reduce using rule 34 (expr -> - expr .)
+    *               reduce using rule 34 (expr -> - expr .)
+    /               reduce using rule 34 (expr -> - expr .)
+    DOTADD          reduce using rule 34 (expr -> - expr .)
+    DOTSUB          reduce using rule 34 (expr -> - expr .)
+    DOTMUL          reduce using rule 34 (expr -> - expr .)
+    DOTDIV          reduce using rule 34 (expr -> - expr .)
+    ,               reduce using rule 34 (expr -> - expr .)
+    :               reduce using rule 34 (expr -> - expr .)
+    ]               reduce using rule 34 (expr -> - expr .)
+    )               reduce using rule 34 (expr -> - expr .)
+    EQ              reduce using rule 34 (expr -> - expr .)
+    NE              reduce using rule 34 (expr -> - expr .)
+    GE              reduce using rule 34 (expr -> - expr .)
+    LE              reduce using rule 34 (expr -> - expr .)
+    >               reduce using rule 34 (expr -> - expr .)
+    <               reduce using rule 34 (expr -> - expr .)
+    {               reduce using rule 34 (expr -> - expr .)
+    RETURN          reduce using rule 34 (expr -> - expr .)
+    BREAK           reduce using rule 34 (expr -> - expr .)
+    CONTINUE        reduce using rule 34 (expr -> - expr .)
+    PRINT           reduce using rule 34 (expr -> - expr .)
+    WHILE           reduce using rule 34 (expr -> - expr .)
+    FOR             reduce using rule 34 (expr -> - expr .)
+    IF              reduce using rule 34 (expr -> - expr .)
+    ID              reduce using rule 34 (expr -> - expr .)
+    '               shift and go to state 52
+
+  ! '               [ reduce using rule 34 (expr -> - expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! *               [ shift and go to state 46 ]
+  ! /               [ shift and go to state 47 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+  ! DOTMUL          [ shift and go to state 50 ]
+  ! DOTDIV          [ shift and go to state 51 ]
+
+
+state 58
+
+    (43) expr -> ( expr . )
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               shift and go to state 89
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 59
+
+    (45) expr -> EYE ( . expr )
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 90
+
+state 60
+
+    (46) expr -> ZEROS ( . expr )
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 91
+
+state 61
+
+    (47) expr -> ONES ( . expr )
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 92
+
+state 62
+
+    (10) instruction -> PRINT expressions ; .
+
+    {               reduce using rule 10 (instruction -> PRINT expressions ; .)
+    RETURN          reduce using rule 10 (instruction -> PRINT expressions ; .)
+    BREAK           reduce using rule 10 (instruction -> PRINT expressions ; .)
+    CONTINUE        reduce using rule 10 (instruction -> PRINT expressions ; .)
+    PRINT           reduce using rule 10 (instruction -> PRINT expressions ; .)
+    WHILE           reduce using rule 10 (instruction -> PRINT expressions ; .)
+    FOR             reduce using rule 10 (instruction -> PRINT expressions ; .)
+    IF              reduce using rule 10 (instruction -> PRINT expressions ; .)
+    ID              reduce using rule 10 (instruction -> PRINT expressions ; .)
+    $end            reduce using rule 10 (instruction -> PRINT expressions ; .)
+    }               reduce using rule 10 (instruction -> PRINT expressions ; .)
+    ELSE            reduce using rule 10 (instruction -> PRINT expressions ; .)
+
+
+state 63
+
+    (54) expressions -> expressions , . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 93
+
+state 64
+
+    (11) instruction -> var = expr . ;
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               shift and go to state 94
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 65
+
+    (12) instruction -> var ADDASSIGN expr . ;
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               shift and go to state 95
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 66
+
+    (13) instruction -> var SUBASSIGN expr . ;
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               shift and go to state 96
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 67
+
+    (14) instruction -> var MULASSIGN expr . ;
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               shift and go to state 97
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 68
+
+    (15) instruction -> var DIVASSIGN expr . ;
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               shift and go to state 98
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 69
+
+    (16) instruction -> WHILE ( condition . ) instruction
+
+    )               shift and go to state 99
+
+
+state 70
+
+    (21) condition -> expr . EQ expr
+    (22) condition -> expr . NE expr
+    (23) condition -> expr . GE expr
+    (24) condition -> expr . LE expr
+    (25) condition -> expr . > expr
+    (26) condition -> expr . < expr
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    EQ              shift and go to state 100
+    NE              shift and go to state 101
+    GE              shift and go to state 102
+    LE              shift and go to state 103
+    >               shift and go to state 104
+    <               shift and go to state 105
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 71
+
+    (17) instruction -> FOR ID = . range instruction
+    (56) range -> . expr : expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    range                          shift and go to state 106
+    expr                           shift and go to state 107
+
+state 72
+
+    (18) instruction -> FOR ( ID . = range ) instruction
+
+    =               shift and go to state 108
+
+
+state 73
+
+    (29) var -> ID [ range . ]
+
+    ]               shift and go to state 109
+
+
+state 74
+
+    (30) var -> ID [ expr . ]
+    (31) var -> ID [ expr . , expr ]
+    (56) range -> expr . : expr
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ]               shift and go to state 110
+    ,               shift and go to state 111
+    :               shift and go to state 88
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 75
+
+    (19) instruction -> IF ( condition . ) instruction
+    (20) instruction -> IF ( condition . ) instruction ELSE instruction
+
+    )               shift and go to state 112
+
+
+state 76
+
+    (35) expr -> expr + expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 35 (expr -> expr + expr .)
+    +               reduce using rule 35 (expr -> expr + expr .)
+    -               reduce using rule 35 (expr -> expr + expr .)
+    DOTADD          reduce using rule 35 (expr -> expr + expr .)
+    DOTSUB          reduce using rule 35 (expr -> expr + expr .)
+    ,               reduce using rule 35 (expr -> expr + expr .)
+    :               reduce using rule 35 (expr -> expr + expr .)
+    ]               reduce using rule 35 (expr -> expr + expr .)
+    )               reduce using rule 35 (expr -> expr + expr .)
+    EQ              reduce using rule 35 (expr -> expr + expr .)
+    NE              reduce using rule 35 (expr -> expr + expr .)
+    GE              reduce using rule 35 (expr -> expr + expr .)
+    LE              reduce using rule 35 (expr -> expr + expr .)
+    >               reduce using rule 35 (expr -> expr + expr .)
+    <               reduce using rule 35 (expr -> expr + expr .)
+    {               reduce using rule 35 (expr -> expr + expr .)
+    RETURN          reduce using rule 35 (expr -> expr + expr .)
+    BREAK           reduce using rule 35 (expr -> expr + expr .)
+    CONTINUE        reduce using rule 35 (expr -> expr + expr .)
+    PRINT           reduce using rule 35 (expr -> expr + expr .)
+    WHILE           reduce using rule 35 (expr -> expr + expr .)
+    FOR             reduce using rule 35 (expr -> expr + expr .)
+    IF              reduce using rule 35 (expr -> expr + expr .)
+    ID              reduce using rule 35 (expr -> expr + expr .)
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+  ! *               [ reduce using rule 35 (expr -> expr + expr .) ]
+  ! /               [ reduce using rule 35 (expr -> expr + expr .) ]
+  ! DOTMUL          [ reduce using rule 35 (expr -> expr + expr .) ]
+  ! DOTDIV          [ reduce using rule 35 (expr -> expr + expr .) ]
+  ! '               [ reduce using rule 35 (expr -> expr + expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+
+
+state 77
+
+    (36) expr -> expr - expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 36 (expr -> expr - expr .)
+    +               reduce using rule 36 (expr -> expr - expr .)
+    -               reduce using rule 36 (expr -> expr - expr .)
+    DOTADD          reduce using rule 36 (expr -> expr - expr .)
+    DOTSUB          reduce using rule 36 (expr -> expr - expr .)
+    ,               reduce using rule 36 (expr -> expr - expr .)
+    :               reduce using rule 36 (expr -> expr - expr .)
+    ]               reduce using rule 36 (expr -> expr - expr .)
+    )               reduce using rule 36 (expr -> expr - expr .)
+    EQ              reduce using rule 36 (expr -> expr - expr .)
+    NE              reduce using rule 36 (expr -> expr - expr .)
+    GE              reduce using rule 36 (expr -> expr - expr .)
+    LE              reduce using rule 36 (expr -> expr - expr .)
+    >               reduce using rule 36 (expr -> expr - expr .)
+    <               reduce using rule 36 (expr -> expr - expr .)
+    {               reduce using rule 36 (expr -> expr - expr .)
+    RETURN          reduce using rule 36 (expr -> expr - expr .)
+    BREAK           reduce using rule 36 (expr -> expr - expr .)
+    CONTINUE        reduce using rule 36 (expr -> expr - expr .)
+    PRINT           reduce using rule 36 (expr -> expr - expr .)
+    WHILE           reduce using rule 36 (expr -> expr - expr .)
+    FOR             reduce using rule 36 (expr -> expr - expr .)
+    IF              reduce using rule 36 (expr -> expr - expr .)
+    ID              reduce using rule 36 (expr -> expr - expr .)
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+  ! *               [ reduce using rule 36 (expr -> expr - expr .) ]
+  ! /               [ reduce using rule 36 (expr -> expr - expr .) ]
+  ! DOTMUL          [ reduce using rule 36 (expr -> expr - expr .) ]
+  ! DOTDIV          [ reduce using rule 36 (expr -> expr - expr .) ]
+  ! '               [ reduce using rule 36 (expr -> expr - expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+
+
+state 78
+
+    (37) expr -> expr * expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 37 (expr -> expr * expr .)
+    +               reduce using rule 37 (expr -> expr * expr .)
+    -               reduce using rule 37 (expr -> expr * expr .)
+    *               reduce using rule 37 (expr -> expr * expr .)
+    /               reduce using rule 37 (expr -> expr * expr .)
+    DOTADD          reduce using rule 37 (expr -> expr * expr .)
+    DOTSUB          reduce using rule 37 (expr -> expr * expr .)
+    DOTMUL          reduce using rule 37 (expr -> expr * expr .)
+    DOTDIV          reduce using rule 37 (expr -> expr * expr .)
+    ,               reduce using rule 37 (expr -> expr * expr .)
+    :               reduce using rule 37 (expr -> expr * expr .)
+    ]               reduce using rule 37 (expr -> expr * expr .)
+    )               reduce using rule 37 (expr -> expr * expr .)
+    EQ              reduce using rule 37 (expr -> expr * expr .)
+    NE              reduce using rule 37 (expr -> expr * expr .)
+    GE              reduce using rule 37 (expr -> expr * expr .)
+    LE              reduce using rule 37 (expr -> expr * expr .)
+    >               reduce using rule 37 (expr -> expr * expr .)
+    <               reduce using rule 37 (expr -> expr * expr .)
+    {               reduce using rule 37 (expr -> expr * expr .)
+    RETURN          reduce using rule 37 (expr -> expr * expr .)
+    BREAK           reduce using rule 37 (expr -> expr * expr .)
+    CONTINUE        reduce using rule 37 (expr -> expr * expr .)
+    PRINT           reduce using rule 37 (expr -> expr * expr .)
+    WHILE           reduce using rule 37 (expr -> expr * expr .)
+    FOR             reduce using rule 37 (expr -> expr * expr .)
+    IF              reduce using rule 37 (expr -> expr * expr .)
+    ID              reduce using rule 37 (expr -> expr * expr .)
+    '               shift and go to state 52
+
+  ! '               [ reduce using rule 37 (expr -> expr * expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! *               [ shift and go to state 46 ]
+  ! /               [ shift and go to state 47 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+  ! DOTMUL          [ shift and go to state 50 ]
+  ! DOTDIV          [ shift and go to state 51 ]
+
+
+state 79
+
+    (38) expr -> expr / expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 38 (expr -> expr / expr .)
+    +               reduce using rule 38 (expr -> expr / expr .)
+    -               reduce using rule 38 (expr -> expr / expr .)
+    *               reduce using rule 38 (expr -> expr / expr .)
+    /               reduce using rule 38 (expr -> expr / expr .)
+    DOTADD          reduce using rule 38 (expr -> expr / expr .)
+    DOTSUB          reduce using rule 38 (expr -> expr / expr .)
+    DOTMUL          reduce using rule 38 (expr -> expr / expr .)
+    DOTDIV          reduce using rule 38 (expr -> expr / expr .)
+    ,               reduce using rule 38 (expr -> expr / expr .)
+    :               reduce using rule 38 (expr -> expr / expr .)
+    ]               reduce using rule 38 (expr -> expr / expr .)
+    )               reduce using rule 38 (expr -> expr / expr .)
+    EQ              reduce using rule 38 (expr -> expr / expr .)
+    NE              reduce using rule 38 (expr -> expr / expr .)
+    GE              reduce using rule 38 (expr -> expr / expr .)
+    LE              reduce using rule 38 (expr -> expr / expr .)
+    >               reduce using rule 38 (expr -> expr / expr .)
+    <               reduce using rule 38 (expr -> expr / expr .)
+    {               reduce using rule 38 (expr -> expr / expr .)
+    RETURN          reduce using rule 38 (expr -> expr / expr .)
+    BREAK           reduce using rule 38 (expr -> expr / expr .)
+    CONTINUE        reduce using rule 38 (expr -> expr / expr .)
+    PRINT           reduce using rule 38 (expr -> expr / expr .)
+    WHILE           reduce using rule 38 (expr -> expr / expr .)
+    FOR             reduce using rule 38 (expr -> expr / expr .)
+    IF              reduce using rule 38 (expr -> expr / expr .)
+    ID              reduce using rule 38 (expr -> expr / expr .)
+    '               shift and go to state 52
+
+  ! '               [ reduce using rule 38 (expr -> expr / expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! *               [ shift and go to state 46 ]
+  ! /               [ shift and go to state 47 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+  ! DOTMUL          [ shift and go to state 50 ]
+  ! DOTDIV          [ shift and go to state 51 ]
+
+
+state 80
+
+    (39) expr -> expr DOTADD expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 39 (expr -> expr DOTADD expr .)
+    +               reduce using rule 39 (expr -> expr DOTADD expr .)
+    -               reduce using rule 39 (expr -> expr DOTADD expr .)
+    DOTADD          reduce using rule 39 (expr -> expr DOTADD expr .)
+    DOTSUB          reduce using rule 39 (expr -> expr DOTADD expr .)
+    ,               reduce using rule 39 (expr -> expr DOTADD expr .)
+    :               reduce using rule 39 (expr -> expr DOTADD expr .)
+    ]               reduce using rule 39 (expr -> expr DOTADD expr .)
+    )               reduce using rule 39 (expr -> expr DOTADD expr .)
+    EQ              reduce using rule 39 (expr -> expr DOTADD expr .)
+    NE              reduce using rule 39 (expr -> expr DOTADD expr .)
+    GE              reduce using rule 39 (expr -> expr DOTADD expr .)
+    LE              reduce using rule 39 (expr -> expr DOTADD expr .)
+    >               reduce using rule 39 (expr -> expr DOTADD expr .)
+    <               reduce using rule 39 (expr -> expr DOTADD expr .)
+    {               reduce using rule 39 (expr -> expr DOTADD expr .)
+    RETURN          reduce using rule 39 (expr -> expr DOTADD expr .)
+    BREAK           reduce using rule 39 (expr -> expr DOTADD expr .)
+    CONTINUE        reduce using rule 39 (expr -> expr DOTADD expr .)
+    PRINT           reduce using rule 39 (expr -> expr DOTADD expr .)
+    WHILE           reduce using rule 39 (expr -> expr DOTADD expr .)
+    FOR             reduce using rule 39 (expr -> expr DOTADD expr .)
+    IF              reduce using rule 39 (expr -> expr DOTADD expr .)
+    ID              reduce using rule 39 (expr -> expr DOTADD expr .)
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+  ! *               [ reduce using rule 39 (expr -> expr DOTADD expr .) ]
+  ! /               [ reduce using rule 39 (expr -> expr DOTADD expr .) ]
+  ! DOTMUL          [ reduce using rule 39 (expr -> expr DOTADD expr .) ]
+  ! DOTDIV          [ reduce using rule 39 (expr -> expr DOTADD expr .) ]
+  ! '               [ reduce using rule 39 (expr -> expr DOTADD expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+
+
+state 81
+
+    (40) expr -> expr DOTSUB expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    +               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    -               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    DOTADD          reduce using rule 40 (expr -> expr DOTSUB expr .)
+    DOTSUB          reduce using rule 40 (expr -> expr DOTSUB expr .)
+    ,               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    :               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    ]               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    )               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    EQ              reduce using rule 40 (expr -> expr DOTSUB expr .)
+    NE              reduce using rule 40 (expr -> expr DOTSUB expr .)
+    GE              reduce using rule 40 (expr -> expr DOTSUB expr .)
+    LE              reduce using rule 40 (expr -> expr DOTSUB expr .)
+    >               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    <               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    {               reduce using rule 40 (expr -> expr DOTSUB expr .)
+    RETURN          reduce using rule 40 (expr -> expr DOTSUB expr .)
+    BREAK           reduce using rule 40 (expr -> expr DOTSUB expr .)
+    CONTINUE        reduce using rule 40 (expr -> expr DOTSUB expr .)
+    PRINT           reduce using rule 40 (expr -> expr DOTSUB expr .)
+    WHILE           reduce using rule 40 (expr -> expr DOTSUB expr .)
+    FOR             reduce using rule 40 (expr -> expr DOTSUB expr .)
+    IF              reduce using rule 40 (expr -> expr DOTSUB expr .)
+    ID              reduce using rule 40 (expr -> expr DOTSUB expr .)
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+  ! *               [ reduce using rule 40 (expr -> expr DOTSUB expr .) ]
+  ! /               [ reduce using rule 40 (expr -> expr DOTSUB expr .) ]
+  ! DOTMUL          [ reduce using rule 40 (expr -> expr DOTSUB expr .) ]
+  ! DOTDIV          [ reduce using rule 40 (expr -> expr DOTSUB expr .) ]
+  ! '               [ reduce using rule 40 (expr -> expr DOTSUB expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+
+
+state 82
+
+    (41) expr -> expr DOTMUL expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    +               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    -               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    *               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    /               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    DOTADD          reduce using rule 41 (expr -> expr DOTMUL expr .)
+    DOTSUB          reduce using rule 41 (expr -> expr DOTMUL expr .)
+    DOTMUL          reduce using rule 41 (expr -> expr DOTMUL expr .)
+    DOTDIV          reduce using rule 41 (expr -> expr DOTMUL expr .)
+    ,               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    :               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    ]               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    )               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    EQ              reduce using rule 41 (expr -> expr DOTMUL expr .)
+    NE              reduce using rule 41 (expr -> expr DOTMUL expr .)
+    GE              reduce using rule 41 (expr -> expr DOTMUL expr .)
+    LE              reduce using rule 41 (expr -> expr DOTMUL expr .)
+    >               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    <               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    {               reduce using rule 41 (expr -> expr DOTMUL expr .)
+    RETURN          reduce using rule 41 (expr -> expr DOTMUL expr .)
+    BREAK           reduce using rule 41 (expr -> expr DOTMUL expr .)
+    CONTINUE        reduce using rule 41 (expr -> expr DOTMUL expr .)
+    PRINT           reduce using rule 41 (expr -> expr DOTMUL expr .)
+    WHILE           reduce using rule 41 (expr -> expr DOTMUL expr .)
+    FOR             reduce using rule 41 (expr -> expr DOTMUL expr .)
+    IF              reduce using rule 41 (expr -> expr DOTMUL expr .)
+    ID              reduce using rule 41 (expr -> expr DOTMUL expr .)
+    '               shift and go to state 52
+
+  ! '               [ reduce using rule 41 (expr -> expr DOTMUL expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! *               [ shift and go to state 46 ]
+  ! /               [ shift and go to state 47 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+  ! DOTMUL          [ shift and go to state 50 ]
+  ! DOTDIV          [ shift and go to state 51 ]
+
+
+state 83
+
+    (42) expr -> expr DOTDIV expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    +               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    -               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    *               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    /               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    DOTADD          reduce using rule 42 (expr -> expr DOTDIV expr .)
+    DOTSUB          reduce using rule 42 (expr -> expr DOTDIV expr .)
+    DOTMUL          reduce using rule 42 (expr -> expr DOTDIV expr .)
+    DOTDIV          reduce using rule 42 (expr -> expr DOTDIV expr .)
+    ,               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    :               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    ]               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    )               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    EQ              reduce using rule 42 (expr -> expr DOTDIV expr .)
+    NE              reduce using rule 42 (expr -> expr DOTDIV expr .)
+    GE              reduce using rule 42 (expr -> expr DOTDIV expr .)
+    LE              reduce using rule 42 (expr -> expr DOTDIV expr .)
+    >               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    <               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    {               reduce using rule 42 (expr -> expr DOTDIV expr .)
+    RETURN          reduce using rule 42 (expr -> expr DOTDIV expr .)
+    BREAK           reduce using rule 42 (expr -> expr DOTDIV expr .)
+    CONTINUE        reduce using rule 42 (expr -> expr DOTDIV expr .)
+    PRINT           reduce using rule 42 (expr -> expr DOTDIV expr .)
+    WHILE           reduce using rule 42 (expr -> expr DOTDIV expr .)
+    FOR             reduce using rule 42 (expr -> expr DOTDIV expr .)
+    IF              reduce using rule 42 (expr -> expr DOTDIV expr .)
+    ID              reduce using rule 42 (expr -> expr DOTDIV expr .)
+    '               shift and go to state 52
+
+  ! '               [ reduce using rule 42 (expr -> expr DOTDIV expr .) ]
+  ! +               [ shift and go to state 44 ]
+  ! -               [ shift and go to state 45 ]
+  ! *               [ shift and go to state 46 ]
+  ! /               [ shift and go to state 47 ]
+  ! DOTADD          [ shift and go to state 48 ]
+  ! DOTSUB          [ shift and go to state 49 ]
+  ! DOTMUL          [ shift and go to state 50 ]
+  ! DOTDIV          [ shift and go to state 51 ]
+
+
+state 84
+
+    (28) expr -> ID [ range . ]
+
+    ]               shift and go to state 113
+
+
+state 85
+
+    (32) expr -> ID [ expr . ]
+    (33) expr -> ID [ expr . , expr ]
+    (56) range -> expr . : expr
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ]               shift and go to state 114
+    ,               shift and go to state 115
+    :               shift and go to state 88
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 86
+
+    (52) expr -> [ expressions ] .
+
+    ;               reduce using rule 52 (expr -> [ expressions ] .)
+    +               reduce using rule 52 (expr -> [ expressions ] .)
+    -               reduce using rule 52 (expr -> [ expressions ] .)
+    *               reduce using rule 52 (expr -> [ expressions ] .)
+    /               reduce using rule 52 (expr -> [ expressions ] .)
+    DOTADD          reduce using rule 52 (expr -> [ expressions ] .)
+    DOTSUB          reduce using rule 52 (expr -> [ expressions ] .)
+    DOTMUL          reduce using rule 52 (expr -> [ expressions ] .)
+    DOTDIV          reduce using rule 52 (expr -> [ expressions ] .)
+    '               reduce using rule 52 (expr -> [ expressions ] .)
+    ,               reduce using rule 52 (expr -> [ expressions ] .)
+    :               reduce using rule 52 (expr -> [ expressions ] .)
+    ]               reduce using rule 52 (expr -> [ expressions ] .)
+    )               reduce using rule 52 (expr -> [ expressions ] .)
+    EQ              reduce using rule 52 (expr -> [ expressions ] .)
+    NE              reduce using rule 52 (expr -> [ expressions ] .)
+    GE              reduce using rule 52 (expr -> [ expressions ] .)
+    LE              reduce using rule 52 (expr -> [ expressions ] .)
+    >               reduce using rule 52 (expr -> [ expressions ] .)
+    <               reduce using rule 52 (expr -> [ expressions ] .)
+    {               reduce using rule 52 (expr -> [ expressions ] .)
+    RETURN          reduce using rule 52 (expr -> [ expressions ] .)
+    BREAK           reduce using rule 52 (expr -> [ expressions ] .)
+    CONTINUE        reduce using rule 52 (expr -> [ expressions ] .)
+    PRINT           reduce using rule 52 (expr -> [ expressions ] .)
+    WHILE           reduce using rule 52 (expr -> [ expressions ] .)
+    FOR             reduce using rule 52 (expr -> [ expressions ] .)
+    IF              reduce using rule 52 (expr -> [ expressions ] .)
+    ID              reduce using rule 52 (expr -> [ expressions ] .)
+
+
+state 87
+
+    (53) expr -> [ range ] .
+
+    ;               reduce using rule 53 (expr -> [ range ] .)
+    +               reduce using rule 53 (expr -> [ range ] .)
+    -               reduce using rule 53 (expr -> [ range ] .)
+    *               reduce using rule 53 (expr -> [ range ] .)
+    /               reduce using rule 53 (expr -> [ range ] .)
+    DOTADD          reduce using rule 53 (expr -> [ range ] .)
+    DOTSUB          reduce using rule 53 (expr -> [ range ] .)
+    DOTMUL          reduce using rule 53 (expr -> [ range ] .)
+    DOTDIV          reduce using rule 53 (expr -> [ range ] .)
+    '               reduce using rule 53 (expr -> [ range ] .)
+    ,               reduce using rule 53 (expr -> [ range ] .)
+    :               reduce using rule 53 (expr -> [ range ] .)
+    ]               reduce using rule 53 (expr -> [ range ] .)
+    )               reduce using rule 53 (expr -> [ range ] .)
+    EQ              reduce using rule 53 (expr -> [ range ] .)
+    NE              reduce using rule 53 (expr -> [ range ] .)
+    GE              reduce using rule 53 (expr -> [ range ] .)
+    LE              reduce using rule 53 (expr -> [ range ] .)
+    >               reduce using rule 53 (expr -> [ range ] .)
+    <               reduce using rule 53 (expr -> [ range ] .)
+    {               reduce using rule 53 (expr -> [ range ] .)
+    RETURN          reduce using rule 53 (expr -> [ range ] .)
+    BREAK           reduce using rule 53 (expr -> [ range ] .)
+    CONTINUE        reduce using rule 53 (expr -> [ range ] .)
+    PRINT           reduce using rule 53 (expr -> [ range ] .)
+    WHILE           reduce using rule 53 (expr -> [ range ] .)
+    FOR             reduce using rule 53 (expr -> [ range ] .)
+    IF              reduce using rule 53 (expr -> [ range ] .)
+    ID              reduce using rule 53 (expr -> [ range ] .)
+
+
+state 88
+
+    (56) range -> expr : . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 116
+
+state 89
+
+    (43) expr -> ( expr ) .
+
+    ;               reduce using rule 43 (expr -> ( expr ) .)
+    +               reduce using rule 43 (expr -> ( expr ) .)
+    -               reduce using rule 43 (expr -> ( expr ) .)
+    *               reduce using rule 43 (expr -> ( expr ) .)
+    /               reduce using rule 43 (expr -> ( expr ) .)
+    DOTADD          reduce using rule 43 (expr -> ( expr ) .)
+    DOTSUB          reduce using rule 43 (expr -> ( expr ) .)
+    DOTMUL          reduce using rule 43 (expr -> ( expr ) .)
+    DOTDIV          reduce using rule 43 (expr -> ( expr ) .)
+    '               reduce using rule 43 (expr -> ( expr ) .)
+    ,               reduce using rule 43 (expr -> ( expr ) .)
+    :               reduce using rule 43 (expr -> ( expr ) .)
+    ]               reduce using rule 43 (expr -> ( expr ) .)
+    )               reduce using rule 43 (expr -> ( expr ) .)
+    EQ              reduce using rule 43 (expr -> ( expr ) .)
+    NE              reduce using rule 43 (expr -> ( expr ) .)
+    GE              reduce using rule 43 (expr -> ( expr ) .)
+    LE              reduce using rule 43 (expr -> ( expr ) .)
+    >               reduce using rule 43 (expr -> ( expr ) .)
+    <               reduce using rule 43 (expr -> ( expr ) .)
+    {               reduce using rule 43 (expr -> ( expr ) .)
+    RETURN          reduce using rule 43 (expr -> ( expr ) .)
+    BREAK           reduce using rule 43 (expr -> ( expr ) .)
+    CONTINUE        reduce using rule 43 (expr -> ( expr ) .)
+    PRINT           reduce using rule 43 (expr -> ( expr ) .)
+    WHILE           reduce using rule 43 (expr -> ( expr ) .)
+    FOR             reduce using rule 43 (expr -> ( expr ) .)
+    IF              reduce using rule 43 (expr -> ( expr ) .)
+    ID              reduce using rule 43 (expr -> ( expr ) .)
+
+
+state 90
+
+    (45) expr -> EYE ( expr . )
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               shift and go to state 117
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 91
+
+    (46) expr -> ZEROS ( expr . )
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               shift and go to state 118
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 92
+
+    (47) expr -> ONES ( expr . )
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               shift and go to state 119
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 93
+
+    (54) expressions -> expressions , expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ;               reduce using rule 54 (expressions -> expressions , expr .)
+    ,               reduce using rule 54 (expressions -> expressions , expr .)
+    ]               reduce using rule 54 (expressions -> expressions , expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 94
+
+    (11) instruction -> var = expr ; .
+
+    {               reduce using rule 11 (instruction -> var = expr ; .)
+    RETURN          reduce using rule 11 (instruction -> var = expr ; .)
+    BREAK           reduce using rule 11 (instruction -> var = expr ; .)
+    CONTINUE        reduce using rule 11 (instruction -> var = expr ; .)
+    PRINT           reduce using rule 11 (instruction -> var = expr ; .)
+    WHILE           reduce using rule 11 (instruction -> var = expr ; .)
+    FOR             reduce using rule 11 (instruction -> var = expr ; .)
+    IF              reduce using rule 11 (instruction -> var = expr ; .)
+    ID              reduce using rule 11 (instruction -> var = expr ; .)
+    $end            reduce using rule 11 (instruction -> var = expr ; .)
+    }               reduce using rule 11 (instruction -> var = expr ; .)
+    ELSE            reduce using rule 11 (instruction -> var = expr ; .)
+
+
+state 95
+
+    (12) instruction -> var ADDASSIGN expr ; .
+
+    {               reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    RETURN          reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    BREAK           reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    CONTINUE        reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    PRINT           reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    WHILE           reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    FOR             reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    IF              reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    ID              reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    $end            reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    }               reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+    ELSE            reduce using rule 12 (instruction -> var ADDASSIGN expr ; .)
+
+
+state 96
+
+    (13) instruction -> var SUBASSIGN expr ; .
+
+    {               reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    RETURN          reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    BREAK           reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    CONTINUE        reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    PRINT           reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    WHILE           reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    FOR             reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    IF              reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    ID              reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    $end            reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    }               reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+    ELSE            reduce using rule 13 (instruction -> var SUBASSIGN expr ; .)
+
+
+state 97
+
+    (14) instruction -> var MULASSIGN expr ; .
+
+    {               reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    RETURN          reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    BREAK           reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    CONTINUE        reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    PRINT           reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    WHILE           reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    FOR             reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    IF              reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    ID              reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    $end            reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    }               reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+    ELSE            reduce using rule 14 (instruction -> var MULASSIGN expr ; .)
+
+
+state 98
+
+    (15) instruction -> var DIVASSIGN expr ; .
+
+    {               reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    RETURN          reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    BREAK           reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    CONTINUE        reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    PRINT           reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    WHILE           reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    FOR             reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    IF              reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    ID              reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    $end            reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    }               reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+    ELSE            reduce using rule 15 (instruction -> var DIVASSIGN expr ; .)
+
+
+state 99
+
+    (16) instruction -> WHILE ( condition ) . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 120
+    var                            shift and go to state 9
+
+state 100
+
+    (21) condition -> expr EQ . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 121
+
+state 101
+
+    (22) condition -> expr NE . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 122
+
+state 102
+
+    (23) condition -> expr GE . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 123
+
+state 103
+
+    (24) condition -> expr LE . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 124
+
+state 104
+
+    (25) condition -> expr > . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 125
+
+state 105
+
+    (26) condition -> expr < . expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 126
+
+state 106
+
+    (17) instruction -> FOR ID = range . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 127
+    var                            shift and go to state 9
+
+state 107
+
+    (56) range -> expr . : expr
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    :               shift and go to state 88
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 108
+
+    (18) instruction -> FOR ( ID = . range ) instruction
+    (56) range -> . expr : expr
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    range                          shift and go to state 128
+    expr                           shift and go to state 107
+
+state 109
+
+    (29) var -> ID [ range ] .
+
+    =               reduce using rule 29 (var -> ID [ range ] .)
+    ADDASSIGN       reduce using rule 29 (var -> ID [ range ] .)
+    SUBASSIGN       reduce using rule 29 (var -> ID [ range ] .)
+    MULASSIGN       reduce using rule 29 (var -> ID [ range ] .)
+    DIVASSIGN       reduce using rule 29 (var -> ID [ range ] .)
+
+
+state 110
+
+    (30) var -> ID [ expr ] .
+
+    =               reduce using rule 30 (var -> ID [ expr ] .)
+    ADDASSIGN       reduce using rule 30 (var -> ID [ expr ] .)
+    SUBASSIGN       reduce using rule 30 (var -> ID [ expr ] .)
+    MULASSIGN       reduce using rule 30 (var -> ID [ expr ] .)
+    DIVASSIGN       reduce using rule 30 (var -> ID [ expr ] .)
+
+
+state 111
+
+    (31) var -> ID [ expr , . expr ]
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 129
+
+state 112
+
+    (19) instruction -> IF ( condition ) . instruction
+    (20) instruction -> IF ( condition ) . instruction ELSE instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 130
+    var                            shift and go to state 9
+
+state 113
+
+    (28) expr -> ID [ range ] .
+
+    ;               reduce using rule 28 (expr -> ID [ range ] .)
+    +               reduce using rule 28 (expr -> ID [ range ] .)
+    -               reduce using rule 28 (expr -> ID [ range ] .)
+    *               reduce using rule 28 (expr -> ID [ range ] .)
+    /               reduce using rule 28 (expr -> ID [ range ] .)
+    DOTADD          reduce using rule 28 (expr -> ID [ range ] .)
+    DOTSUB          reduce using rule 28 (expr -> ID [ range ] .)
+    DOTMUL          reduce using rule 28 (expr -> ID [ range ] .)
+    DOTDIV          reduce using rule 28 (expr -> ID [ range ] .)
+    '               reduce using rule 28 (expr -> ID [ range ] .)
+    ,               reduce using rule 28 (expr -> ID [ range ] .)
+    :               reduce using rule 28 (expr -> ID [ range ] .)
+    ]               reduce using rule 28 (expr -> ID [ range ] .)
+    )               reduce using rule 28 (expr -> ID [ range ] .)
+    EQ              reduce using rule 28 (expr -> ID [ range ] .)
+    NE              reduce using rule 28 (expr -> ID [ range ] .)
+    GE              reduce using rule 28 (expr -> ID [ range ] .)
+    LE              reduce using rule 28 (expr -> ID [ range ] .)
+    >               reduce using rule 28 (expr -> ID [ range ] .)
+    <               reduce using rule 28 (expr -> ID [ range ] .)
+    {               reduce using rule 28 (expr -> ID [ range ] .)
+    RETURN          reduce using rule 28 (expr -> ID [ range ] .)
+    BREAK           reduce using rule 28 (expr -> ID [ range ] .)
+    CONTINUE        reduce using rule 28 (expr -> ID [ range ] .)
+    PRINT           reduce using rule 28 (expr -> ID [ range ] .)
+    WHILE           reduce using rule 28 (expr -> ID [ range ] .)
+    FOR             reduce using rule 28 (expr -> ID [ range ] .)
+    IF              reduce using rule 28 (expr -> ID [ range ] .)
+    ID              reduce using rule 28 (expr -> ID [ range ] .)
+
+
+state 114
+
+    (32) expr -> ID [ expr ] .
+
+    ;               reduce using rule 32 (expr -> ID [ expr ] .)
+    +               reduce using rule 32 (expr -> ID [ expr ] .)
+    -               reduce using rule 32 (expr -> ID [ expr ] .)
+    *               reduce using rule 32 (expr -> ID [ expr ] .)
+    /               reduce using rule 32 (expr -> ID [ expr ] .)
+    DOTADD          reduce using rule 32 (expr -> ID [ expr ] .)
+    DOTSUB          reduce using rule 32 (expr -> ID [ expr ] .)
+    DOTMUL          reduce using rule 32 (expr -> ID [ expr ] .)
+    DOTDIV          reduce using rule 32 (expr -> ID [ expr ] .)
+    '               reduce using rule 32 (expr -> ID [ expr ] .)
+    ,               reduce using rule 32 (expr -> ID [ expr ] .)
+    :               reduce using rule 32 (expr -> ID [ expr ] .)
+    ]               reduce using rule 32 (expr -> ID [ expr ] .)
+    )               reduce using rule 32 (expr -> ID [ expr ] .)
+    EQ              reduce using rule 32 (expr -> ID [ expr ] .)
+    NE              reduce using rule 32 (expr -> ID [ expr ] .)
+    GE              reduce using rule 32 (expr -> ID [ expr ] .)
+    LE              reduce using rule 32 (expr -> ID [ expr ] .)
+    >               reduce using rule 32 (expr -> ID [ expr ] .)
+    <               reduce using rule 32 (expr -> ID [ expr ] .)
+    {               reduce using rule 32 (expr -> ID [ expr ] .)
+    RETURN          reduce using rule 32 (expr -> ID [ expr ] .)
+    BREAK           reduce using rule 32 (expr -> ID [ expr ] .)
+    CONTINUE        reduce using rule 32 (expr -> ID [ expr ] .)
+    PRINT           reduce using rule 32 (expr -> ID [ expr ] .)
+    WHILE           reduce using rule 32 (expr -> ID [ expr ] .)
+    FOR             reduce using rule 32 (expr -> ID [ expr ] .)
+    IF              reduce using rule 32 (expr -> ID [ expr ] .)
+    ID              reduce using rule 32 (expr -> ID [ expr ] .)
+
+
+state 115
+
+    (33) expr -> ID [ expr , . expr ]
+    (28) expr -> . ID [ range ]
+    (32) expr -> . ID [ expr ]
+    (33) expr -> . ID [ expr , expr ]
+    (34) expr -> . - expr
+    (35) expr -> . expr + expr
+    (36) expr -> . expr - expr
+    (37) expr -> . expr * expr
+    (38) expr -> . expr / expr
+    (39) expr -> . expr DOTADD expr
+    (40) expr -> . expr DOTSUB expr
+    (41) expr -> . expr DOTMUL expr
+    (42) expr -> . expr DOTDIV expr
+    (43) expr -> . ( expr )
+    (44) expr -> . expr '
+    (45) expr -> . EYE ( expr )
+    (46) expr -> . ZEROS ( expr )
+    (47) expr -> . ONES ( expr )
+    (48) expr -> . FLOATNUM
+    (49) expr -> . INTNUM
+    (50) expr -> . STRING
+    (51) expr -> . ID
+    (52) expr -> . [ expressions ]
+    (53) expr -> . [ range ]
+
+    ID              shift and go to state 18
+    -               shift and go to state 20
+    (               shift and go to state 21
+    EYE             shift and go to state 22
+    ZEROS           shift and go to state 23
+    ONES            shift and go to state 24
+    FLOATNUM        shift and go to state 25
+    INTNUM          shift and go to state 26
+    STRING          shift and go to state 27
+    [               shift and go to state 19
+
+    expr                           shift and go to state 131
+
+state 116
+
+    (56) range -> expr : expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ]               reduce using rule 56 (range -> expr : expr .)
+    {               reduce using rule 56 (range -> expr : expr .)
+    RETURN          reduce using rule 56 (range -> expr : expr .)
+    BREAK           reduce using rule 56 (range -> expr : expr .)
+    CONTINUE        reduce using rule 56 (range -> expr : expr .)
+    PRINT           reduce using rule 56 (range -> expr : expr .)
+    WHILE           reduce using rule 56 (range -> expr : expr .)
+    FOR             reduce using rule 56 (range -> expr : expr .)
+    IF              reduce using rule 56 (range -> expr : expr .)
+    ID              reduce using rule 56 (range -> expr : expr .)
+    )               reduce using rule 56 (range -> expr : expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 117
+
+    (45) expr -> EYE ( expr ) .
+
+    ;               reduce using rule 45 (expr -> EYE ( expr ) .)
+    +               reduce using rule 45 (expr -> EYE ( expr ) .)
+    -               reduce using rule 45 (expr -> EYE ( expr ) .)
+    *               reduce using rule 45 (expr -> EYE ( expr ) .)
+    /               reduce using rule 45 (expr -> EYE ( expr ) .)
+    DOTADD          reduce using rule 45 (expr -> EYE ( expr ) .)
+    DOTSUB          reduce using rule 45 (expr -> EYE ( expr ) .)
+    DOTMUL          reduce using rule 45 (expr -> EYE ( expr ) .)
+    DOTDIV          reduce using rule 45 (expr -> EYE ( expr ) .)
+    '               reduce using rule 45 (expr -> EYE ( expr ) .)
+    ,               reduce using rule 45 (expr -> EYE ( expr ) .)
+    :               reduce using rule 45 (expr -> EYE ( expr ) .)
+    ]               reduce using rule 45 (expr -> EYE ( expr ) .)
+    )               reduce using rule 45 (expr -> EYE ( expr ) .)
+    EQ              reduce using rule 45 (expr -> EYE ( expr ) .)
+    NE              reduce using rule 45 (expr -> EYE ( expr ) .)
+    GE              reduce using rule 45 (expr -> EYE ( expr ) .)
+    LE              reduce using rule 45 (expr -> EYE ( expr ) .)
+    >               reduce using rule 45 (expr -> EYE ( expr ) .)
+    <               reduce using rule 45 (expr -> EYE ( expr ) .)
+    {               reduce using rule 45 (expr -> EYE ( expr ) .)
+    RETURN          reduce using rule 45 (expr -> EYE ( expr ) .)
+    BREAK           reduce using rule 45 (expr -> EYE ( expr ) .)
+    CONTINUE        reduce using rule 45 (expr -> EYE ( expr ) .)
+    PRINT           reduce using rule 45 (expr -> EYE ( expr ) .)
+    WHILE           reduce using rule 45 (expr -> EYE ( expr ) .)
+    FOR             reduce using rule 45 (expr -> EYE ( expr ) .)
+    IF              reduce using rule 45 (expr -> EYE ( expr ) .)
+    ID              reduce using rule 45 (expr -> EYE ( expr ) .)
+
+
+state 118
+
+    (46) expr -> ZEROS ( expr ) .
+
+    ;               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    +               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    -               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    *               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    /               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    DOTADD          reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    DOTSUB          reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    DOTMUL          reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    DOTDIV          reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    '               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    ,               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    :               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    ]               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    )               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    EQ              reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    NE              reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    GE              reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    LE              reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    >               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    <               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    {               reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    RETURN          reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    BREAK           reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    CONTINUE        reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    PRINT           reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    WHILE           reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    FOR             reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    IF              reduce using rule 46 (expr -> ZEROS ( expr ) .)
+    ID              reduce using rule 46 (expr -> ZEROS ( expr ) .)
+
+
+state 119
+
+    (47) expr -> ONES ( expr ) .
+
+    ;               reduce using rule 47 (expr -> ONES ( expr ) .)
+    +               reduce using rule 47 (expr -> ONES ( expr ) .)
+    -               reduce using rule 47 (expr -> ONES ( expr ) .)
+    *               reduce using rule 47 (expr -> ONES ( expr ) .)
+    /               reduce using rule 47 (expr -> ONES ( expr ) .)
+    DOTADD          reduce using rule 47 (expr -> ONES ( expr ) .)
+    DOTSUB          reduce using rule 47 (expr -> ONES ( expr ) .)
+    DOTMUL          reduce using rule 47 (expr -> ONES ( expr ) .)
+    DOTDIV          reduce using rule 47 (expr -> ONES ( expr ) .)
+    '               reduce using rule 47 (expr -> ONES ( expr ) .)
+    ,               reduce using rule 47 (expr -> ONES ( expr ) .)
+    :               reduce using rule 47 (expr -> ONES ( expr ) .)
+    ]               reduce using rule 47 (expr -> ONES ( expr ) .)
+    )               reduce using rule 47 (expr -> ONES ( expr ) .)
+    EQ              reduce using rule 47 (expr -> ONES ( expr ) .)
+    NE              reduce using rule 47 (expr -> ONES ( expr ) .)
+    GE              reduce using rule 47 (expr -> ONES ( expr ) .)
+    LE              reduce using rule 47 (expr -> ONES ( expr ) .)
+    >               reduce using rule 47 (expr -> ONES ( expr ) .)
+    <               reduce using rule 47 (expr -> ONES ( expr ) .)
+    {               reduce using rule 47 (expr -> ONES ( expr ) .)
+    RETURN          reduce using rule 47 (expr -> ONES ( expr ) .)
+    BREAK           reduce using rule 47 (expr -> ONES ( expr ) .)
+    CONTINUE        reduce using rule 47 (expr -> ONES ( expr ) .)
+    PRINT           reduce using rule 47 (expr -> ONES ( expr ) .)
+    WHILE           reduce using rule 47 (expr -> ONES ( expr ) .)
+    FOR             reduce using rule 47 (expr -> ONES ( expr ) .)
+    IF              reduce using rule 47 (expr -> ONES ( expr ) .)
+    ID              reduce using rule 47 (expr -> ONES ( expr ) .)
+
+
+state 120
+
+    (16) instruction -> WHILE ( condition ) instruction .
+
+    {               reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    RETURN          reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    BREAK           reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    CONTINUE        reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    PRINT           reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    WHILE           reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    FOR             reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    IF              reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    ID              reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    $end            reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    }               reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+    ELSE            reduce using rule 16 (instruction -> WHILE ( condition ) instruction .)
+
+
+state 121
+
+    (21) condition -> expr EQ expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               reduce using rule 21 (condition -> expr EQ expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 122
+
+    (22) condition -> expr NE expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               reduce using rule 22 (condition -> expr NE expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 123
+
+    (23) condition -> expr GE expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               reduce using rule 23 (condition -> expr GE expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 124
+
+    (24) condition -> expr LE expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               reduce using rule 24 (condition -> expr LE expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 125
+
+    (25) condition -> expr > expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               reduce using rule 25 (condition -> expr > expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 126
+
+    (26) condition -> expr < expr .
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    )               reduce using rule 26 (condition -> expr < expr .)
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 127
+
+    (17) instruction -> FOR ID = range instruction .
+
+    {               reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    RETURN          reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    BREAK           reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    CONTINUE        reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    PRINT           reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    WHILE           reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    FOR             reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    IF              reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    ID              reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    $end            reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    }               reduce using rule 17 (instruction -> FOR ID = range instruction .)
+    ELSE            reduce using rule 17 (instruction -> FOR ID = range instruction .)
+
+
+state 128
+
+    (18) instruction -> FOR ( ID = range . ) instruction
+
+    )               shift and go to state 132
+
+
+state 129
+
+    (31) var -> ID [ expr , expr . ]
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ]               shift and go to state 133
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 130
+
+    (19) instruction -> IF ( condition ) instruction .
+    (20) instruction -> IF ( condition ) instruction . ELSE instruction
+
+    {               reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    RETURN          reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    BREAK           reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    CONTINUE        reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    PRINT           reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    WHILE           reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    FOR             reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    IF              reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    ID              reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    $end            reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    }               reduce using rule 19 (instruction -> IF ( condition ) instruction .)
+    ELSE            shift and go to state 134
+
+  ! ELSE            [ reduce using rule 19 (instruction -> IF ( condition ) instruction .) ]
+
+
+state 131
+
+    (33) expr -> ID [ expr , expr . ]
+    (35) expr -> expr . + expr
+    (36) expr -> expr . - expr
+    (37) expr -> expr . * expr
+    (38) expr -> expr . / expr
+    (39) expr -> expr . DOTADD expr
+    (40) expr -> expr . DOTSUB expr
+    (41) expr -> expr . DOTMUL expr
+    (42) expr -> expr . DOTDIV expr
+    (44) expr -> expr . '
+
+    ]               shift and go to state 135
+    +               shift and go to state 44
+    -               shift and go to state 45
+    *               shift and go to state 46
+    /               shift and go to state 47
+    DOTADD          shift and go to state 48
+    DOTSUB          shift and go to state 49
+    DOTMUL          shift and go to state 50
+    DOTDIV          shift and go to state 51
+    '               shift and go to state 52
+
+
+state 132
+
+    (18) instruction -> FOR ( ID = range ) . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 136
+    var                            shift and go to state 9
+
+state 133
+
+    (31) var -> ID [ expr , expr ] .
+
+    =               reduce using rule 31 (var -> ID [ expr , expr ] .)
+    ADDASSIGN       reduce using rule 31 (var -> ID [ expr , expr ] .)
+    SUBASSIGN       reduce using rule 31 (var -> ID [ expr , expr ] .)
+    MULASSIGN       reduce using rule 31 (var -> ID [ expr , expr ] .)
+    DIVASSIGN       reduce using rule 31 (var -> ID [ expr , expr ] .)
+
+
+state 134
+
+    (20) instruction -> IF ( condition ) instruction ELSE . instruction
+    (5) instruction -> . { instructions }
+    (6) instruction -> . RETURN ;
+    (7) instruction -> . RETURN expr ;
+    (8) instruction -> . BREAK ;
+    (9) instruction -> . CONTINUE ;
+    (10) instruction -> . PRINT expressions ;
+    (11) instruction -> . var = expr ;
+    (12) instruction -> . var ADDASSIGN expr ;
+    (13) instruction -> . var SUBASSIGN expr ;
+    (14) instruction -> . var MULASSIGN expr ;
+    (15) instruction -> . var DIVASSIGN expr ;
+    (16) instruction -> . WHILE ( condition ) instruction
+    (17) instruction -> . FOR ID = range instruction
+    (18) instruction -> . FOR ( ID = range ) instruction
+    (19) instruction -> . IF ( condition ) instruction
+    (20) instruction -> . IF ( condition ) instruction ELSE instruction
+    (27) var -> . ID
+    (29) var -> . ID [ range ]
+    (30) var -> . ID [ expr ]
+    (31) var -> . ID [ expr , expr ]
+
+    {               shift and go to state 4
+    RETURN          shift and go to state 5
+    BREAK           shift and go to state 6
+    CONTINUE        shift and go to state 7
+    PRINT           shift and go to state 8
+    WHILE           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    ID              shift and go to state 12
+
+    instruction                    shift and go to state 137
+    var                            shift and go to state 9
+
+state 135
+
+    (33) expr -> ID [ expr , expr ] .
+
+    ;               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    +               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    -               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    *               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    /               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    DOTADD          reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    DOTSUB          reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    DOTMUL          reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    DOTDIV          reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    '               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    ,               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    :               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    ]               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    )               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    EQ              reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    NE              reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    GE              reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    LE              reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    >               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    <               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    {               reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    RETURN          reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    BREAK           reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    CONTINUE        reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    PRINT           reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    WHILE           reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    FOR             reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    IF              reduce using rule 33 (expr -> ID [ expr , expr ] .)
+    ID              reduce using rule 33 (expr -> ID [ expr , expr ] .)
+
+
+state 136
+
+    (18) instruction -> FOR ( ID = range ) instruction .
+
+    {               reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    RETURN          reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    BREAK           reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    CONTINUE        reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    PRINT           reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    WHILE           reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    FOR             reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    IF              reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    ID              reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    $end            reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    }               reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+    ELSE            reduce using rule 18 (instruction -> FOR ( ID = range ) instruction .)
+
+
+state 137
+
+    (20) instruction -> IF ( condition ) instruction ELSE instruction .
+
+    {               reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    RETURN          reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    BREAK           reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    CONTINUE        reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    PRINT           reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    WHILE           reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    FOR             reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    IF              reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    ID              reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    $end            reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    }               reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    ELSE            reduce using rule 20 (instruction -> IF ( condition ) instruction ELSE instruction .)
+
